@@ -32,18 +32,16 @@
 </head>
 <body>
     <div class="countdown-container">
-        <h1>距离目标日期的倒计时</h1>
+        <h1>距离💕日期的倒计时</h1>
         <!-- 新增显示目标日期的元素 -->
-        <p>目标日期: <span id="target-date"></span></p>
+        <p>💕日期: <span id="target-date"></span></p>
         <div class="countdown" id="countdown"></div>
     </div>
     <script>
-        // 设置目标日期，格式为 'YYYY-MM-DD HH:MM:SS'
-        const targetDate = new Date('2026-06-01 00:00:00').getTime();
-        // 显示目标日期
-        const targetDateObj = new Date(targetDate);
-        const formattedDate = targetDateObj.toLocaleString();
-        document.getElementById('target-date').textContent = formattedDate;
+        // 设置目标日期，格式为 'YYYY-MM-DD'
+        const targetDate = new Date('2026-06-01'); // 这里以 2026 年 6 月 1 日为例，您可以修改为实际日期
+        // 修改为只显示年月日
+        document.getElementById('target-date').textContent = targetDate.toLocaleDateString();
 
         // 更新倒计时的函数
         const updateCountdown = () => {
