@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日期倒计时</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .countdown-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .countdown {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <h1>距离目标日期的倒计时</h1>
+        <!-- 新增显示目标日期的元素 -->
+        <p>目标日期: <span id="target-date"></span></p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+    <script>
+        // 设置目标日期，格式为 'YYYY-MM-DD HH:MM:SS'
+        const targetDate = new Date('2026-06-01 00:00:00').getTime();
+        // 显示目标日期
+        const targetDateObj = new Date(targetDate);
+        const formattedDate = targetDateObj.toLocaleString();
+        document.getElementById('target-date').textContent = formattedDate;
+
+        // 更新倒计时的函数
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('countdown').innerHTML = `${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+            } else {
+                document.getElementById('countdown').innerHTML = '倒计时已结束！';
+            }
+        }
+
+        // 每秒更新一次倒计时
+        setInterval(updateCountdown, 1000);
+
+        // 页面加载时立即更新一次
+        updateCountdown();
+    </script>
+</body>
+</html>
